@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>WMF Chat Demo</title>
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,600,700,900' rel='stylesheet' type='text/css'>
+    <link href="dependencies/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="style.less" rel="stylesheet" type="text/less"/>
+    <script type="text/javascript" src="dependencies/less.min.js"></script>
+    <script type="text/javascript" src="dependencies/jquery.min.js"></script>
+    <script type="text/javascript" src="dependencies/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="chat.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Chattipedia</h1>
+        <h4>The Talk page anyone can comment on</h4>
+    </div>
+
+    <div id="topics">
+    </div>
+</div>
+
+    <script type="text/html" id="topic-template" type="text/x-jquery-tmpl">
+        <div class="row">
+            <div id="topic-${id}" class="topic col-xs-12">
+                <div class="row">
+                    <div class="col-med-11 col-sm-9">
+                        <h2>${topictitle}</h2>
+                    </div>
+                    <div class="col-med-1 col-sm-3 metadata">
+                        {{if numComments > 1}}
+                            <div class="comment-info"><span class="num-comments">${numComments}</span><br>comments</div>
+                        {{/if}}
+                        <div class="expander">
+                            <span class="glyphicon glyphicon-expand"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="first-post-trunc row">
+                    <div class="comment">
+                        <div class="author col-sm-12">${firstpost.author}</div>
+                        <div class="text col-sm-12">{{html firstpost.summary }}</div>
+                    </div>
+                </div>
+                <div class="replies">
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/html" id="reply-template" type="text/x-jquery-tmpl">
+        <div id="${id}" class="reply">
+            <div class="comment">
+                <div class="row">
+                    <div class="author col-sm-12">${author}</div>
+                </div>
+                <div class="row">
+                    <div class="text col-sm-12">{{html posttext}}</div>
+                </div>
+            </div>
+            <div class="children"></div>
+        </div>
+    </script>
+</body>
+</html>

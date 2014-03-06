@@ -1,0 +1,201 @@
+@h1: 3em;
+@h2: 2em;
+@h3: 1.6em;
+@h4: 1.2em;
+@h5: 1.1em;
+
+@normaltext: #444;
+@emphtext: black;
+@unimportanttext: #888;
+
+@firstpostcolor: #fdffe9;
+
+@standardpadding: 15px;
+@childrenborderwidth: 4px;
+@childrenbasecolor: #c0c0ff;
+
+@tinyscreenpadding: 3px;
+@tinyscreenborder: 2px;
+@medscreenpadding: 6px;
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 12pt;
+    font-weight: 300;
+    font-family: 'Source Sans Pro', Helvetica, sans-serif;
+    color: @normaltext;
+    background: #f9f9f9;
+}
+
+h1, h2, h3 {
+    margin-top: 0;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: @h1;
+    font-weight: 900;
+}
+
+h2 {
+    font-size: @h2;
+    margin-bottom: 0;
+}
+
+h3 {
+    font-size: @h3;
+}
+
+h4 {
+    font-style: italic;
+    font-weight: 300;
+}
+
+.header {
+    margin-bottom: @standardpadding*3;
+}
+
+.topic {
+    background: white;
+    padding-top: @standardpadding;
+    margin-bottom: @standardpadding;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: 2px 2px 5px rgba(0,0,0,.4);
+        h2, .num-comments, .expander {
+            color: black;
+        }
+    }
+
+    .metadata {
+        text-align: right;
+        line-height: .8em;
+        color: @unimportanttext;
+    }
+
+    .comment-info {
+        padding-bottom: @standardpadding;
+    }
+
+    .num-comments {
+        font-size: @h2;
+        line-height: 1em;
+        color: @normaltext;
+        font-weight: 900;
+    }
+
+    .expander {
+        .num-comments;
+        display: inline-block;
+        -webkit-transition: transform 2s;
+        transition: transform 2s;
+
+        &.expanded {
+            -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+    }
+
+    .replies {
+        display: none;
+        cursor: default;
+        padding-bottom: @standardpadding;
+    }
+}
+
+.author {
+    color: @unimportanttext;
+    font-size: @h4;
+    font-weight: 400;
+}
+
+.comment {
+    padding-top: @standardpadding/4;
+    padding-bottom: @standardpadding/2;
+}
+
+.first-post-trunc {
+    background: @firstpostcolor;
+    margin-top: @standardpadding;
+}
+
+.topic .replies .reply:nth-of-type(1) {
+    .first-post-trunc;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    .text {
+        max-width: none;
+        width: 100%;
+    }
+}
+
+.topic .reply, .topic .replies .children .reply {
+    background: none;
+    .text {
+        max-width: 600px;
+    }
+}
+
+.children .reply .comment {
+    margin-left: -@standardpadding - @childrenborderwidth;
+    padding-left: @standardpadding;
+    border-left: @childrenborderwidth solid darken(@childrenbasecolor, 20%);
+}
+
+.children {
+    margin-left: 2*@standardpadding - 2;
+    padding-left: @standardpadding;
+    border-left: @childrenborderwidth solid @childrenbasecolor;
+    .children {
+        border-color: lighten(@childrenbasecolor, 5%);
+        .children {
+            border-color: lighten(@childrenbasecolor, 10%);
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .children .reply .comment {
+        margin-left: -@medscreenpadding - @childrenborderwidth;
+        padding-left: @standardpadding;
+        border-width: @childrenborderwidth;
+    }
+
+    .children {
+        margin-left: 2*@medscreenpadding - 2;
+        padding-left: @medscreenpadding;
+        border-width: @childrenborderwidth;
+    }
+}
+
+@media (max-width: 768px) {
+    .children .reply .comment {
+        margin-left: -@tinyscreenpadding - @tinyscreenborder;
+        padding-left: @tinyscreenpadding*3;
+        border-width: @tinyscreenborder;
+    }
+
+    .children {
+        margin-left: 2*@tinyscreenpadding - 2;
+        padding-left: @tinyscreenpadding;
+        border-width: @tinyscreenborder;
+    }
+
+    .topic .metadata {
+        text-align: left;
+        margin-top: @standardpadding;
+    }
+
+    .comment {
+        padding-top: @tinyscreenpadding;
+        padding-bottom: @tinyscreenpadding*2;
+    }
+
+    .topic .replies .reply:nth-of-type(1), .first-post-trunc {
+        margin-top: @tinyscreenpadding*2;
+    }
+}
